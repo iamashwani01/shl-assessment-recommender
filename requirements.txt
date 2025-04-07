@@ -39,6 +39,7 @@ pillow==10.4.0
 psutil==7.0.0
 pydantic==2.10.6
 pydantic-core==2.27.2
+python-dotenv==1.0.1
 python-multipart==0.0.20
 PyYAML==6.0.2
 regex==2024.11.6
