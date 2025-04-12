@@ -6,10 +6,7 @@ from services.recommender import get_recommendation
 
 app = FastAPI()
 
-
 templates = Jinja2Templates(directory="templates")
-
-
 
 @app.get("/", response_class=HTMLResponse)
 async def home(request: Request):
@@ -21,7 +18,8 @@ async def recommend(
     job_role: str = Form(...),
     competencies: str = Form(...)
 ):
-    recommendations = await get_recommendation(job_role, competencies)
+    query = f"{job_role} with competencies in {competencies}"
+    recommendations = await get_recommendation(query)
     return templates.TemplateResponse("index.html", {
         "request": request,
         "recommendations": recommendations,
