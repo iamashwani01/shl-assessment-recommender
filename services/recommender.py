@@ -6,7 +6,8 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-HUGGINGFACE_API_URL = "https://api-inference.huggingface.co/models/mistralai/Mixtral-8x7B-Instruct-v0.1"
+HUGGINGFACE_API_URL = "HUGGINGFACE_API_URL = "https://api-inference.huggingface.co/models/google/flan-t5-small"
+
 
 API_KEY = os.getenv("HUGGINGFACE_API_KEY")
 headers = {
