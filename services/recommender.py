@@ -13,7 +13,9 @@ headers = {
     "Authorization": f"Bearer {API_KEY}"
 }
 
-async def get_recommendation(query: str) -> list:
+async def get_recommendation(job_role: str, competencies: str) -> list:
+    query = f"{job_role} with competencies in {competencies}"
+
     prompt = (
         f"You are an expert in SHL assessments. Based on the following job description or query:\n\n"
         f"{query}\n\n"
@@ -47,8 +49,17 @@ async def get_recommendation(query: str) -> list:
 
         if isinstance(result, list) and "generated_text" in result[0]:
             text = result[0]["generated_text"].strip()
-            return json.loads(text)
-
+            try:
+                return json.loads(text)
+            except json.JSONDecodeError as e:
+                return [{
+                    "url": "",
+                    "adaptive_support": "No",
+                    "description": f"⚠️ JSON decoding failed: {str(e)} | Raw response: {text}",
+                    "duration": 0,
+                    "remote_support": "No",
+                    "test_type": []
+                }]
         else:
             return [{
                 "url": "",
@@ -58,7 +69,6 @@ async def get_recommendation(query: str) -> list:
                 "remote_support": "No",
                 "test_type": []
             }]
-
     except Exception as e:
         return [{
             "url": "",
