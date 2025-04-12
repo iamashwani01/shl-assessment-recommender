@@ -10,9 +10,12 @@ HUGGINGFACE_API_URL = "https://api-inference.huggingface.co/models/mistralai/Mix
 
 
 API_KEY = os.getenv("HUGGINGFACE_API_KEY")
-headers = {
-    "Authorization": f"Bearer {API_KEY}"
-}
+if API_KEY is None:
+    print("Error: HUGGINGFACE_API_KEY environment variable is not set.")
+else:
+    headers = {
+        "Authorization": f"Bearer {API_KEY}"
+    }
 
 
 async def get_recommendation(query: str) -> list:
