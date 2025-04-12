@@ -6,7 +6,6 @@ from services.recommender import get_recommendation
 
 app = FastAPI()
 
-
 templates = Jinja2Templates(directory="templates")
 
 
